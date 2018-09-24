@@ -1,5 +1,7 @@
 package org.radekbor.gateway;
 
+import io.reactivex.Observable;
+import io.reactivex.functions.BiFunction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.concurrent.Future;
 
 @RestController
 @RibbonClient(name = "book-service", configuration = ClientConfiguration.class)
@@ -22,11 +25,29 @@ public class CustomerDetailsController {
     @Autowired
     private BooksClient booksClient;
 
+    private Observable<Customer> makeRequestToServiceA(int customerId) {
+        return Observable.fromCallable(() -> {
+            log.info("customerClient.getClient");
+            return customerClient.getClient(customerId);
+        }); //some network call
+    }
+
+    private Observable<List<Book>> makeRequestToServiceB(int customerId) {
+        return Observable.fromCallable(() -> {
+                    log.info("booksClient.getBooks");
+                    return booksClient.getBooks(customerId);
+                }
+        ); //some network call based on response from ServiceA
+    }
+
     @GetMapping("/customer/{customerId}")
-    public CustomerDetails getDetails(@PathVariable("customerId") int customerId) {
-        Customer customer = customerClient.getClient(customerId);
-        List<Book> books = booksClient.getBooks(customerId);
-        CustomerDetails result = new CustomerDetails(customer, books);
-        return result;
+    public Observable<Object> getDetails(@PathVariable("customerId") int customerId) {
+        Observable<List<Book>> booksObervable = makeRequestToServiceB(customerId);
+        Observable<Customer> customerObservable = makeRequestToServiceA(customerId);
+        log.info("obervables are ready");
+        return Observable.zip(
+                customerObservable,
+                booksObervable,
+                (BiFunction<Customer, List<Book>, Object>) CustomerDetails::new);
     }
 }

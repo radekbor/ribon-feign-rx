@@ -1,6 +1,17 @@
 spring:
-    application:
-        name: gateway
+  application:
+      name: cutomer-library
+  sleuth:
+    sampler:
+      probability: 1.0
+  zipkin:
+    discoveryClientEnabled: false
+
+logging.level.org.springframework.cloud.sleuth: DEBUG
+
+eureka:
+  client:
+    enabled: false
 
 feign:
   client:
@@ -10,9 +21,13 @@ feign:
         readTimeout: 5000
         loggerLevel: full
 
+sample:
+  zipkin:
+    enabled: true
+
 book-service:
-    ribbon:
-        eureka:
-            enabled: false
-        listOfServers: localhost:8081, localhost:8082
-        ServerListRefreshInterval: 15000
+  ribbon:
+    eureka:
+        enabled: false
+    listOfServers: localhost:8081, localhost:8082
+    ServerListRefreshInterval: 15000

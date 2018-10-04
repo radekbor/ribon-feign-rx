@@ -1,5 +1,7 @@
 package org.radekbor.books;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,6 +12,8 @@ import java.util.stream.Collectors;
 
 @RestController()
 public class BookController {
+
+    private static final Logger log = LoggerFactory.getLogger(BookController.class);
 
     private List<Book> books = new ArrayList<>();
 
@@ -27,6 +31,7 @@ public class BookController {
 
     @GetMapping("/books/user/{userId}")
     public List<Book> getUserBooks(@PathVariable("userId") int userId) {
+        log.info("getting user books {}", userId);
         return books.stream().filter(book -> book.getCustomer() == userId).collect(Collectors.toList());
     }
 }

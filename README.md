@@ -11,3 +11,11 @@ Current configuration
 
 - GatewayApplication, ports:
     - 8080
+ 
+- Zipkin server, port: 9411
+
+Please run 
+
+1) curl -i http://localhost:8080/customer/1
+
+2) Go to http://localhost:9411/zipkin/

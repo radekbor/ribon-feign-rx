@@ -1,5 +1,8 @@
 spring:
     application:
-        name: books-service
-spring.sleuth.sampler.probability: 1.0
+        name: customers
+    sleuth:
+      sampler:
+        probability: 1.0
+
 logging.level.org.springframework.cloud.sleuth: DEBUG

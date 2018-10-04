@@ -1,5 +1,7 @@
 package org.radekbor.customers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +13,8 @@ import java.util.List;
 
 @RestController
 public class CustomerController {
+
+    private static final Logger log = LoggerFactory.getLogger(CustomerController.class);
 
     private List<Customer> all = new ArrayList<>();
 
@@ -27,6 +31,7 @@ public class CustomerController {
 
     @GetMapping("/customers/{customerId}")
     public Customer getCustomer(@PathVariable("customerId") long customerId) {
+        log.info("getting customer {}", customerId);
         return all.stream().filter(customer -> customer.getId() == customerId)
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException("Not found"));

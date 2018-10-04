@@ -14,7 +14,6 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(value = "/customer/details")
-@RibbonClient(name = "book-service", configuration = ClientConfiguration.class)
 public class CustomerDetailsController {
 
     private static final Logger log = LoggerFactory.getLogger(CustomerDetailsController.class);

@@ -1,5 +1,9 @@
 spring:
-    application:
-        name: books-service
-spring.sleuth.sampler.probability: 1.0
-logging.level.org.springframework.cloud.sleuth: DEBUG
+  application:
+    name: books-service
+  sleuth.sampler.probability: 1.0
+logging:
+  file: logs/dev_app.log
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %X{mdcData} - %msg%n"
+    file: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %X{mdcData} - %msg%n"

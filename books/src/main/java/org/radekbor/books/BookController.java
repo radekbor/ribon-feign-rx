@@ -26,6 +26,7 @@ public class BookController {
 
     @GetMapping("/books")
     public List<Book> bookList() {
+        log.info("getting all books");
         return books;
     }
 

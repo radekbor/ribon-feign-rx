@@ -5,5 +5,5 @@ spring:
 logging:
   file: logs/dev_app.log
   pattern:
-    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %X{mdcData} - %msg%n"
-    file: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %X{mdcData} - %msg%n"
+    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %X{mdcData} - [%X{X-B3-TraceId:-}] - %msg%n"
+    file: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %X{mdcData} - [%X{X-B3-TraceId:-}] - %msg%n"

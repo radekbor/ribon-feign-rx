@@ -1,10 +1,9 @@
-package org.radekbor.books;
+package org.radekbor.gateway;
 
 import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @Component

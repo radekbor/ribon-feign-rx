@@ -34,19 +34,19 @@ book-service:
   ribbon:
     eureka:
         enabled: false
-    listOfServers: localhost:8081, localhost:8082
+    listOfServers: http://172.18.0.2:8080, http://172.18.0.3:8080
     ServerListRefreshInterval: 15000
 
 zipkin-service:
   ribbon:
     eureka:
         enabled: false
-    listOfServers: localhost:9411
+    listOfServers: http://localhost:9411
     ServerListRefreshInterval: 15000
 
 clients-service:
   ribbon:
     eureka:
         enabled: false
-    listOfServers: http://localhost:8083
+    listOfServers: http://172.18.0.4:8080
     ServerListRefreshInterval: 15000

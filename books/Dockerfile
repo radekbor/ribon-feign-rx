@@ -1,5 +1,5 @@
 FROM frolvlad/alpine-oraclejdk8:slim
-ADD ["target/customers-0.0.1-SNAPSHOT.jar", "app.jar"]
+ADD ["target/books-0.0.1-SNAPSHOT.jar", "app.jar"]
 EXPOSE 8080 8787
 ENV JAVA_OPTS="-Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8787,suspend=n"
 RUN sh -c 'touch /app.jar'

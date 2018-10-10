@@ -2,6 +2,8 @@ spring:
   application:
     name: books-service
   sleuth.sampler.probability: 1.0
+  zipkin:
+    base-url: http://172.18.0.9:9411
 logging:
   file: logs/dev_app.log
   pattern:

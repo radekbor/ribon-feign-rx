@@ -1,21 +1,22 @@
 # Cloud plays - ribon && feign && rx
 
-Current configuration
+Current configuration when run via docker
 
-- BooksApplication, ports:
-    - 8081
-    - 8081
+- BooksApplication:
+    - 172.18.0.2
+    - 172.18.0.3
     
-- CustomerApplication, ports:
-    - 8083
+- CustomerApplication:
+    - 172.18.0.4
 
-- GatewayApplication, ports:
-    - 8080
+- GatewayApplication:
+    - 172.18.0.5
  
-- Zipkin server, port: 9411
+- Zipkin server
+    - 172.18.0.9:9411
 
 Please run 
 
-1) curl -i http://localhost:8080/customer/1
+1) curl -i http://localhost:8084/customer/details/1
 
 2) Go to http://localhost:9411/zipkin/

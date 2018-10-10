@@ -4,6 +4,20 @@ networks:
     driver: bridge
 
 services:
+  zipking-server:
+    build:
+      context: ./zipkin-server
+      dockerfile: Dockerfile
+    image: zipkin-server
+    hostname: zipkin-server
+    ports:
+      - 9411:9411
+    networks:
+      cluster:
+        ipv4_address: 172.18.0.9
+        aliases:
+          - zipkin-server
+
   book1:
     build:
       context: ./books

@@ -41,7 +41,7 @@ zipkin-service:
   ribbon:
     eureka:
         enabled: false
-    listOfServers: http://localhost:9411
+    listOfServers: http://172.18.0.9:9411
     ServerListRefreshInterval: 15000
 
 clients-service:

@@ -9,7 +9,6 @@ services:
       context: ./zipkin-server
       dockerfile: Dockerfile
     image: zipkin-server
-    hostname: zipkin-server
     ports:
       - 9411:9411
     networks:
@@ -20,10 +19,11 @@ services:
 
   book1:
     build:
+      args:
+        REGISTER_AS: http://172.18.0.2:8080
       context: ./books
       dockerfile: Dockerfile
     image: books
-    hostname: book1
     ports:
       - 8082:8080
     networks:
@@ -34,10 +34,11 @@ services:
 
   book2:
     build:
+      args:
+        REGISTER_AS: http://172.18.0.3:8080
       context: ./books
       dockerfile: Dockerfile
     image: books
-    hostname: book2
     ports:
       - 8081:8080
     networks:
@@ -47,10 +48,11 @@ services:
           - book2
   customer:
     build:
+      args:
+        REGISTER_AS: http://172.18.0.4:8080
       context: ./customers
       dockerfile: Dockerfile
     image: customers
-    hostname: customers
     ports:
       - 8083:8080
     networks:
@@ -61,6 +63,8 @@ services:
 
   gateway:
     build:
+      args:
+        REGISTER_AS: http://172.18.0.5:8080
       context: ./gateway
       dockerfile: Dockerfile
     image: gateway
@@ -69,3 +73,14 @@ services:
     networks:
       cluster:
         ipv4_address: 172.18.0.5
+
+  admin:
+    build:
+      context: ./admin
+      dockerfile: Dockerfile
+    image: admin
+    ports:
+      - 8088:8080
+    networks:
+      cluster:
+        ipv4_address: 172.18.0.8

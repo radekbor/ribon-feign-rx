@@ -1,6 +1,13 @@
 spring:
   application:
       name: cutomer-library
+  boot:
+    admin:
+      client:
+        enabled: true
+        url: http://172.18.0.8:8080
+        instance.prefer-ip: true
+
   sleuth:
     sampler:
       probability: 1.0
@@ -13,6 +20,7 @@ logging:
   pattern:
     console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %X{mdcData} - [%X{X-B3-TraceId:-}] - %msg%n"
     file: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %X{mdcData} - [%X{X-B3-TraceId:-}] - %msg%n"
+  level.com.netflix.loadbalancer.LoadBalancerContext: DEBUG
 
 eureka:
   client:

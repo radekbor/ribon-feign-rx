@@ -4,8 +4,16 @@ spring:
   sleuth.sampler.probability: 1.0
   zipkin:
     base-url: http://172.18.0.9:9411
+  boot:
+    admin:
+      client:
+        enabled: true
+        url: http://172.18.0.8:8080
+        instance.prefer-ip: true
+
 logging:
   file: logs/dev_app.log
   pattern:
     console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %X{mdcData} - [%X{X-B3-TraceId:-}] - %msg%n"
     file: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %X{mdcData} - [%X{X-B3-TraceId:-}] - %msg%n"
+management.endpoints.web.expose: "*"

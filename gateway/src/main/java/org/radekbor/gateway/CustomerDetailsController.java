@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/** Mapping was changed due problems on zipkin
+/**
+ * Mapping was changed due problems on zipkin
  */
 @RestController
 @RequestMapping(value = "/customer/details")
